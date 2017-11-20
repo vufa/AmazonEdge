@@ -1,1 +1,1 @@
-from AmazonEdge.mode
+from AmazonEdge.models.policy import
