@@ -11,6 +11,14 @@ def get_board(state):
     planes[2, :, :] = state.board == am.BARRIER  # barrier placed
     planes[3, :, :] = state.board == am.EMPTY  # empty space
 
+def get_legal(state):
+    """Zero at all illegal moves, one at all legal moves.
+    """
+    feature = np.zeros((1, state.size, state.size))
+    for (x, y) in state.get_legal_moves():
+        feature[0, x, y] = 1
+    return feature
+
 # named features and their sizes are defined here
 FEATURES = {
     "board": {
@@ -21,16 +29,18 @@ FEATURES = {
         "size": 1,
         "function": lambda state: np.ones((1, state.size, state.size))
     },
-    "turns_since": {
-        "size": 8,
-        "function":
+    "zeros": {
+        "size": 1,
+        "function": lambda state: np.zeros((1, state.size, state.size))
+    },
+    "legal": {
+        "size": 1,
+        "function": get_legal
     }
 }
 
 DEFAULT_FEATURES = [
-    "board", "ones", "turns_since", "liberties", "capture_size",
-    "self_atari_size", "liberties_after", "ladder_capture", "ladder_escape",
-    "sensibleness", "zeros"]
+    "board", "ones", "zeros"]
 
 class Preprocess(object):
     """a class to convert from AmazonEdge objects to tensors of one-hot
@@ -45,3 +55,19 @@ class Preprocess(object):
         self.output_dim = 0
         self.feature_list = feature_list
         self.processors = [None] * len(feature_list)
+        for i in range(len(feature_list)):
+            feat = feature_list[i].lower()
+            if feat in FEATURES:
+                self.processors[i] = FEATURES[feat]["function"]
+                self.output_dim += FEATURES[feat]["size"]
+            else:
+                raise ValueError("uknown feature: %s" % feat)
+
+    def state_to_tensor(self, state):
+        """Convert a GameState to a Theano-compatible tensor
+        """
+        feat_tensors = [proc(state) for proc in self.processors]9
+
+        # concatenate along feature dimensiion then add in a singleton 'batch' dimension
+        f, s = self.output_dim, state.size
+        return np.concatenate(feat_tensors).reshape(1, f, s, s)

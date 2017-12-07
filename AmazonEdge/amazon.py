@@ -15,12 +15,12 @@ class GameState(object):
     # amount of time, hence this shared lookup table {boardsize: {position: [neighbors]}}
     __NEIGHBORS_CACHE = {}
 
+    # a 10x10 board
     def __init__(self, size=10):
         self.board = np.zeros((size, size))
         self.board.fill(EMPTY)
         self.size = size
         self.current_player = BLACK
-        self.ko = None
         self.handicaps = []
         self.history = []
         self.is_end_of_game = False
@@ -38,3 +38,29 @@ class GameState(object):
         # at each board position
         self.liberty_counts = np.zeros((size, size), dtype=np.int)
         self.liberty_counts.fill(-1)
+
+    def _on_board(self, position):
+        """simply return True if position is within the bounds of [0, self.size]
+        """
+        (x, y) = position
+        return x >= 0 and y >= 0 and x < self.size and y < self.size
+
+    def is_legal(self, action):
+        """determine if the given action (x,y) is a legal move
+        """
+        (x, y) = action
+        if not self._on_board(action):
+            return False
+        if self.board[x][y] != EMPTY:
+            return False
+        return True
+
+    def get_legal_moves(self):
+        if self.__legal_move_cache is not None:
+            return self.__legal_move_cache
+        self.__legal_move_cache = []
+        for x in range(self.size):
+            for y in range(self.size):
+                if self.is_legal((x, y)):
+                    self.__legal_move_cache.append((x, y))
+        return self.get_legal_moves()
