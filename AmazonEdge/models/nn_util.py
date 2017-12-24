@@ -79,4 +79,44 @@ class NeuralNetBase(object):
         return new_net
 
     def save_model(self, json_file, weights_file=None):
-        """write the network """
+        """write the network model and preprocessing features to the specified file
+
+        """
+        # this looks odd because we are serializing a model with json as a string
+        # then making that the value of an object which is then serialized as
+        # json again.
+        # A Network has 2 moving parts - the feature preprocessing and the neural
+        # net, each of which gets a top-level entry in the saved file. Keras just
+        # happens to serialize models with JSON as well. Note how this format makes
+        # load_model fairly clean as well.
+        object_specs = {
+            'class': self.__class__.__name__,
+            'keras_model': self.model.to_json(),
+            'feature_list': self.preprocessor.feature_list
+        }
+        if weights_file is not None:
+            self.model.save_weights(weights_file)
+            object_specs['weights_file'] = weights_file
+        # use the json module to write object_specs to file
+        with open(json_file, 'w') as f:
+            json.dump(object_specs, f)
+
+def neuralnet(cls):
+    """Class decorator for registering subclasses of NeuralNetBase
+    """
+    NeuralNetBase.subclasses[cls.__name__] = cls
+    return cls
+
+class Bias(Layer):
+    """Custom keras layer that simply adds a scalar bias to each location in the input
+    """
+    
+    def __init__(self, **kwargs):
+        super(Bias, self).__init__(**kwargs)
+
+    def build(self, input_shape):
+        self.W = K.zeros(input_shape[1:])
+        self.trainable_weights = [self.W]
+
+    def call(self, x, mask=None):
+        return x + self.W
