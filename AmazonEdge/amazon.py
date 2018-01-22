@@ -6,6 +6,7 @@ BARRIER = 2
 EMPTY = 0
 PASS_MOVE = None
 
+
 class GameState(object):
     """
     State of Amazon chess and some basic functions to interact with it
@@ -15,16 +16,17 @@ class GameState(object):
     # amount of time, hence this shared lookup table {boardsize: {position: [neighbors]}}
     __NEIGHBORS_CACHE = {}
 
-    # a 10x10 board
     def __init__(self, size=10):
-        self.board = np.zeros((size, size))
-        self.board.fill(EMPTY)
+        self.board = np.zeros((size, size))  # a 10x10 array
+        self.board.fill(EMPTY)  # init array with EMPTY
         self.size = size
-        self.current_player = BLACK
+        self.current_player = BLACK  # the first player is black
         self.handicaps = []
         self.history = []
+        self.num_black_prisoners = 0  # prisoners of black(cannot move because surrounded by barriers)
+        self.num_white_prisoners = 0
         self.is_end_of_game = False
-        # `self.liberty_sets` is a 2D array with the same indexes as `board`
+        # `self.liberty_sets` is a 10(10x3)x10 2D set() type array with the same indexes as `board`
         # each entry points to a set of tuples - the liberties of a stone's
         # connected block. By caching liberties in this way, we can directly
         # optimize update functions (e.g. do_move) and in doing so indirectly
@@ -44,6 +46,21 @@ class GameState(object):
         """
         (x, y) = position
         return x >= 0 and y >= 0 and x < self.size and y < self.size
+
+    def _create_neighbors_cache(self):
+        if self.size not in GameState.__NEIGHBORS_CACHE:
+            GameState.__NEIGHBORS_CACHE[self.size] = {}
+            for x in range(self.size):
+                for y in range(self.size):
+                    neighbors = [xy for xy in [(x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)]
+                                 if self._on_board(xy)]
+                    GameState.__NEIGHBORS_CACHE[self.size][(x, y)] = neighbors
+
+    def _neighbors(self, position):
+        """A private helper function that simply returns a list of positions neighboring
+        the given (x,y) position. Basically it handles edges and corners.
+        """
+        return GameState.__NEIGHBORS_CACHE[self.size][position]
 
     def is_legal(self, action):
         """determine if the given action (x,y) is a legal move

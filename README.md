@@ -7,6 +7,10 @@ An Ai for Amazon game, AmazonEdge base on neural networks with supervised learni
 * anaconda3(recommend)
 
 #### 1.Create an anaconda environment for Amazon Edge(recommend)
+
+* Download Anaconda: https://www.anaconda.com/download/#linux
+* Install:
+
 ```shell
 conda create -n AmazonEdge python=2.7
 source activate AmazonEdge
