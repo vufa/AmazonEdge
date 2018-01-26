@@ -14,7 +14,7 @@ class NeuralNetBase(object):
     # subclasses can be 'registered' with the @neuralnet decorator
     subclasses = {}
 
-    def __int__(self, feature_list, **kwargs):
+    def __init__(self, feature_list, **kwargs):
         """create a neural net object that preprocesses according to feature_list and uses
         a neural network specified by keyword arguments (using subclass' create_network())
 
