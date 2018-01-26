@@ -4,6 +4,7 @@ from keras.engine.topology import Layer
 from AmazonEdge.preprocessing.preprocessing import Preprocess
 import json
 
+
 class NeuralNetBase(object):
     """Base class for neural network classes handing feature processing, construction
     of a 'forward' function, etc.

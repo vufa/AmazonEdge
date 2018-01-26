@@ -66,7 +66,7 @@ class Preprocess(object):
     def state_to_tensor(self, state):
         """Convert a GameState to a Theano-compatible tensor
         """
-        feat_tensors = [proc(state) for proc in self.processors]9
+        feat_tensors = [proc(state) for proc in self.processors]
 
         # concatenate along feature dimensiion then add in a singleton 'batch' dimension
         f, s = self.output_dim, state.size
