@@ -44,4 +44,7 @@ python2.7 -m AmazonEdge.training.supervised_policy_trainer --help
 
 #### 1.Get a model file(a json specifying the policy network's architecture)
 
+```shell
+python2.7 -m build/create_model MODEL_NAME.json MODEL_PATH
+```
 
