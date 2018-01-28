@@ -42,6 +42,7 @@ FEATURES = {
 DEFAULT_FEATURES = [
     "board", "ones", "zeros"]
 
+
 class Preprocess(object):
     """a class to convert from AmazonEdge objects to tensors of one-hot
     features for NN inputs

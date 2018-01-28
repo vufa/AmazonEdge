@@ -1,13 +1,14 @@
 import os
 from AmazonEdge.models.policy import CNNPolicy
 
-def CreateModel(cmd_line_args=None):
+
+def create_model(cmd_line_args=None):
     """Run training. command-line args may be passed in as a list
     """
     import argparse
     parser = argparse.ArgumentParser(description='Create a convolutional neural network model')
-    parser.add_argument("model", help="Path to a JSON model file (i.e. from CNNPolicy.save_model())")
-    parser.add_argument("out_directory", help="directory where model will be saved")
+    parser.add_argument("model", help="The Name of the JSON model file (i.e. my_model.json)")
+    parser.add_argument("out_directory", help="Directory where model files will be saved (i.e. output)")
     if cmd_line_args is None:
         args = parser.parse_args()
     else:
@@ -18,12 +19,14 @@ def CreateModel(cmd_line_args=None):
     if not os.path.exists(args.out_directory):
         os.makedirs(args.out_directory)
     out_path = args.out_directory+'/'+args.model
+    print("Creating model...")
     if os.path.exists(out_path):
-        print("\033[0;33m%s\033[0m" %"[WARRING]model file %s exists. any previous data will be overwritten" %
+        print("\033[0;33m%s\033[0m" % "[WARRING]Model file %s exists. any previous data will be overwritten" %
               out_path)
     policy.save_model(out_path)
     print("\033[0;32m%s\033[0m" % "[SUCCESS]Model file created at %s successfully" %
           out_path)
 
+
 if __name__ == '__main__':
-    CreateModel()
+    create_model()
