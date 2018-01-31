@@ -48,3 +48,7 @@ python2.7 -m AmazonEdge.training.supervised_policy_trainer --help
 python2.7 -m build/create_model MODEL_NAME.json MODEL_PATH
 ```
 
+#### 2.Running tests
+```shell
+python -m tests.test_supervised_policy_trainer
+```
