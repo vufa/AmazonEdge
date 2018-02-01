@@ -1,6 +1,6 @@
 # Amazon Edge
 
-An Ai for Amazon game, AmazonEdge base on neural networks with supervised learning and reinforcement learning.
+An AI for Game of Amazons, AmazonEdge base on neural networks with supervised learning and reinforcement learning.
 
 ## Environment
 * python 2.7

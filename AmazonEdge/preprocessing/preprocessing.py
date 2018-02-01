@@ -1,6 +1,7 @@
 import numpy as np
 import AmazonEdge.amazon as am
 
+
 def get_board(state):
     """A feature encoding WHITE BLACK BARRIER and EMPTY on separate planes, but plane 0
     always refers to the current player and plane 1 to the opponent
@@ -11,6 +12,7 @@ def get_board(state):
     planes[2, :, :] = state.board == am.BARRIER  # barrier placed
     planes[3, :, :] = state.board == am.EMPTY  # empty space
 
+
 def get_legal(state):
     """Zero at all illegal moves, one at all legal moves.
     """
@@ -19,7 +21,9 @@ def get_legal(state):
         feature[0, x, y] = 1
     return feature
 
+
 # named features and their sizes are defined here
+# legal need fix
 FEATURES = {
     "board": {
         "size": 4,

@@ -14,7 +14,7 @@ def create_model(cmd_line_args=None):
     else:
         args = parser.parse_args(cmd_line_args)
     arch = {'filters_per_layer': 128, 'layers': 12}  # args to CNNPolicy.create_network()
-    features = ['board', 'ones']  # must match args to game_converter
+    features = ['board', 'ones', 'zeros']  # must match args to game_converter
     policy = CNNPolicy(features, **arch)
     if not os.path.exists(args.out_directory):
         os.makedirs(args.out_directory)
