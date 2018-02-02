@@ -12,7 +12,10 @@ def one_hot_action(action, size=10):
     """Convert an (x,y) action into a size x size array of zeros with a 1 at x,y
     """
     categorical = np.zeros((size, size))
-    categorical[action] = 1
+    (x1, y1, x2, y2, x3, y3) = action
+    categorical[10 - y1][x1 - 1] = 0
+    categorical[10 - y2][x2 - 1] = 1
+    categorical[10 - y3][x3 - 1] = 1
     return categorical
 
 
@@ -95,16 +98,30 @@ def run_training(cmd_line_args=None):
     parser.add_argument("train_data", help="A .h5 file of training data")
     parser.add_argument("out_directory", help="directory where metadata and weights will be saved")
     # frequently used args
-    parser.add_argument("--minibatch", "-B", help="Size of training data minibatches. Default: 16", type=int, default=16)  # noqa: E501
-    parser.add_argument("--epochs", "-E", help="Total number of iterations on the data. Default: 10", type=int, default=10)  # noqa: E501
-    parser.add_argument("--epoch-length", "-l", help="Number of training examples considered 'one epoch'. Default: # training data", type=int, default=None)  # noqa: E501
-    parser.add_argument("--learning-rate", "-r", help="Learning rate - how quickly the model learns at first. Default: .03", type=float, default=.03)  # noqa: E501
-    parser.add_argument("--decay", "-d", help="The rate at which learning decreases. Default: .0001", type=float, default=.0001)  # noqa: E501
-    parser.add_argument("--verbose", "-v", help="Turn on verbose mode", default=False, action="store_true")  # noqa: E501
+    parser.add_argument("--minibatch", "-B", help="Size of training data minibatches. Default: 16", type=int,
+                        default=10)  # noqa: E501
+    parser.add_argument("--epochs", "-E", help="Total number of iterations on the data. Default: 10", type=int,
+                        default=10)  # noqa: E501
+    parser.add_argument("--epoch-length", "-l",
+                        help="Number of training examples considered 'one epoch'. Default: # training data", type=int,
+                        default=None)  # noqa: E501
+    parser.add_argument("--learning-rate", "-r",
+                        help="Learning rate - how quickly the model learns at first. Default: .03", type=float,
+                        default=.03)  # noqa: E501
+    parser.add_argument("--decay", "-d", help="The rate at which learning decreases. Default: .0001", type=float,
+                        default=.0001)  # noqa: E501
+    parser.add_argument("--verbose", "-v", help="Turn on verbose mode", default=False,
+                        action="store_true")  # noqa: E501
     # slightly fancier args
-    parser.add_argument("--weights", help="Name of a .h5 weights file (in the output directory) to load to resume training", default=None)  # noqa: E501
-    parser.add_argument("--train-val-test", help="Fraction of data to use for training/val/test. Must sum to 1. Invalid if restarting training", nargs=3, type=float, default=[0.93, .05, .02])  # noqa: E501
-    parser.add_argument("--symmetries", help="Comma-separated list of transforms, subset of noop,rot90,rot180,rot270,fliplr,flipud,diag1,diag2", default='noop,rot90,rot180,rot270,fliplr,flipud,diag1,diag2')  # noqa: E501
+    parser.add_argument("--weights",
+                        help="Name of a .h5 weights file (in the output directory) to load to resume training",
+                        default=None)  # noqa: E501
+    parser.add_argument("--train-val-test",
+                        help="Fraction of data to use for training/val/test. Must sum to 1. Invalid if restarting training",
+                        nargs=3, type=float, default=[0.93, .05, .02])  # noqa: E501
+    parser.add_argument("--symmetries",
+                        help="Comma-separated list of transforms, subset of noop,rot90,rot180,rot270,fliplr,flipud,diag1,diag2",
+                        default='noop,rot90,rot180,rot270,fliplr,flipud,diag1,diag2')  # noqa: E501
     # TODO - an argument to specify which transformations to use, put it in metadata
 
     if cmd_line_args is None:
@@ -122,7 +139,7 @@ def run_training(cmd_line_args=None):
                   (args.out_directory, os.path.join(args.out_directory, args.weights)))
         else:
             if os.path.exists(args.out_directory):
-                print("directory %s exists. any previous data will be overwritten" %
+                print("\033[0;33m%s\033[0m" % "[WARRING]Directory %s exists. any previous data will be overwritten" %
                       args.out_directory)
             else:
                 print("starting fresh output directory %s" % args.out_directory)
@@ -142,7 +159,7 @@ def run_training(cmd_line_args=None):
         dataset_features = dataset['features'][()]
         dataset_features = dataset_features.split(",")
         if len(dataset_features) != len(model_features) or \
-           any(df != mf for (df, mf) in zip(dataset_features, model_features)):
+                any(df != mf for (df, mf) in zip(dataset_features, model_features)):
             raise ValueError("Model JSON file expects features \n\t%s\n"
                              "But dataset contains \n\t%s" % ("\n\t".join(model_features),
                                                               "\n\t".join(dataset_features)))
@@ -159,8 +176,8 @@ def run_training(cmd_line_args=None):
                                                                  "\n\t".join(model_features),
                                                                  n_dataset_planes))
         elif args.verbose:
-            print("Verified agreement of number of model and dataset feature planes, but cannot "
-                  "verify exact match using old dataset format.")
+            print("\033[0;33m%s\033[0m" % "[WARRING]Verified agreement of number of model and dataset feature planes, but cannot "
+                                                "verify exact match using old dataset format.")
 
     n_total_data = len(dataset["states"])
     n_train_data = int(args.train_val_test[0] * n_total_data)
@@ -171,10 +188,10 @@ def run_training(cmd_line_args=None):
     # n_test_data = n_total_data - (n_train_data + n_val_data)
 
     if args.verbose:
-        print("datset loaded")
+        print("dataset loaded")
         print("\t%d total samples" % n_total_data)
         print("\t%d training samples" % n_train_data)
-        print("\t%d validaion samples" % n_val_data)
+        print("\t%d validation samples" % n_val_data)
 
     # ensure output directory is available
     if not os.path.exists(args.out_directory):
