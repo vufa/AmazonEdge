@@ -24,8 +24,8 @@ def shuffled_hdf5_batch_generator(state_dataset, action_dataset,
     """A generator of batches of training data for use with the fit_generator function
     of Keras. Data is accessed in the order of the given indices for shuffling.
     """
-    state_batch_shape = (batch_size,) + state_dataset.shape[1:]
-    game_size = state_batch_shape[-1]
+    state_batch_shape = (batch_size,) + state_dataset.shape[1:]  # (x, 6, 10, 10)
+    game_size = state_batch_shape[-1]  # 10
     Xbatch = np.zeros(state_batch_shape)
     Ybatch = np.zeros((batch_size, game_size * game_size))
     batch_idx = 0
@@ -39,7 +39,7 @@ def shuffled_hdf5_batch_generator(state_dataset, action_dataset,
             state = np.array([transform(plane) for plane in state_dataset[data_idx]])
             # must be cast to a tuple so that it is interpreted as (x,y) not [(x,:), (y,:)]
             action_xy = tuple(action_dataset[data_idx])
-            action = transform(one_hot_action(action_xy, game_size))
+            action = transform(one_hot_action(action_xy, game_size))  # 10x10 array
             Xbatch[batch_idx] = state
             Ybatch[batch_idx] = action.flatten()
             batch_idx += 1

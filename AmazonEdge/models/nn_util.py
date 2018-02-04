@@ -6,7 +6,7 @@ import json
 
 
 class NeuralNetBase(object):
-    """Base class for neural network classes handing feature processing, construction
+    """Base class for neural network classes handling feature processing, construction
     of a 'forward' function, etc.
     """
 
@@ -35,8 +35,10 @@ class NeuralNetBase(object):
         """Construct a function using the current keras backend that, when given a batch
         of inputs, simply processes them forward and returns the output
 
-        This is an opposed to model.compile(), which takes a loss function
+        This is as opposed to model.compile(), which takes a loss function
         and training method.
+
+        c.f. https://github.com/fchollet/keras/issues/1426
         """
         # The uses_learning_phase property is True if the model contains layers that behave
         # differently during training and testing, e.g. Dropout or BatchNormalization.
@@ -46,9 +48,10 @@ class NeuralNetBase(object):
         if self.model.uses_learning_phase:
             forward_function = K.function([self.model.input, K.learning_phase()],
                                           [self.model.output])
-            # the forward_funtion returns a list of tensors
+
+            # the forward_function returns a list of tensors
             # the first [0] gets the front tensor.
-            return lambda inpt: forward_function([input, 0])[0]
+            return lambda inpt: forward_function([inpt, 0])[0]
         else:
             # identical but without a second input argument for the learning phase
             forward_function = K.function([self.model.input], [self.model.output])
@@ -73,7 +76,7 @@ class NeuralNetBase(object):
         # create new object
         new_net = network_class(object_specs['feature_list'], init_network=False)
 
-        new_net.model = model_from_json(object_specs['keras_model'], custom_objects ={'Bias': Bias})
+        new_net.model = model_from_json(object_specs['keras_model'], custom_objects={'Bias': Bias})
         if 'weights_file' in object_specs:
             new_net.model.load_weights(object_specs['weights_file'])
         new_net.forward = new_net._model_forward()
@@ -82,14 +85,16 @@ class NeuralNetBase(object):
     def save_model(self, json_file, weights_file=None):
         """write the network model and preprocessing features to the specified file
 
+        If a weights_file (.hdf5 extension) is also specified, model weights are also
+        saved to that file and will be reloaded automatically in a call to load_model
         """
         # this looks odd because we are serializing a model with json as a string
         # then making that the value of an object which is then serialized as
         # json again.
-        # A Network has 2 moving parts - the feature preprocessing and the neural
-        # net, each of which gets a top-level entry in the saved file. Keras just
-        # happens to serialize models with JSON as well. Note how this format makes
-        # load_model fairly clean as well.
+        # A Network has 2 moving parts - the
+        # feature preprocessing and the neural net, each of which gets a top-level
+        # entry in the saved file. Keras just happens to serialize models with JSON
+        # as well. Note how this format makes load_model fairly clean as well.
         object_specs = {
             'class': self.__class__.__name__,
             'keras_model': self.model.to_json(),
@@ -102,16 +107,18 @@ class NeuralNetBase(object):
         with open(json_file, 'w') as f:
             json.dump(object_specs, f)
 
+
 def neuralnet(cls):
     """Class decorator for registering subclasses of NeuralNetBase
     """
     NeuralNetBase.subclasses[cls.__name__] = cls
     return cls
 
+
 class Bias(Layer):
     """Custom keras layer that simply adds a scalar bias to each location in the input
     """
-    
+
     def __init__(self, **kwargs):
         super(Bias, self).__init__(**kwargs)
 

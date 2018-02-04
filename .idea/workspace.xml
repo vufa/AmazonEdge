@@ -3,8 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="089d5200-7df2-48b8-b65f-520c8389370a" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/AmazonEdge/models/nn_util.py" afterPath="$PROJECT_DIR$/AmazonEdge/models/nn_util.py" />
+      <change beforePath="$PROJECT_DIR$/AmazonEdge/models/policy.py" afterPath="$PROJECT_DIR$/AmazonEdge/models/policy.py" />
+      <change beforePath="$PROJECT_DIR$/AmazonEdge/preprocessing/preprocessing.py" afterPath="$PROJECT_DIR$/AmazonEdge/preprocessing/preprocessing.py" />
       <change beforePath="$PROJECT_DIR$/AmazonEdge/training/supervised_policy_trainer.py" afterPath="$PROJECT_DIR$/AmazonEdge/training/supervised_policy_trainer.py" />
-      <change beforePath="$PROJECT_DIR$/tests/test_supervised_policy_trainer.py" afterPath="$PROJECT_DIR$/tests/test_supervised_policy_trainer.py" />
+      <change beforePath="$PROJECT_DIR$/AmazonEdge/util.py" afterPath="$PROJECT_DIR$/AmazonEdge/util.py" />
+      <change beforePath="$PROJECT_DIR$/build.sh" afterPath="$PROJECT_DIR$/build.sh" />
+      <change beforePath="$PROJECT_DIR$/tests/test_data/model.json" afterPath="$PROJECT_DIR$/tests/test_data/model.json" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,7 +27,7 @@
       <file leaf-file-name="test_supervised_policy_trainer.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/test_supervised_policy_trainer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
+            <state relative-caret-position="136">
               <caret line="10" column="62" lean-forward="false" selection-start-line="10" selection-start-column="62" selection-end-line="10" selection-end-column="62" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -34,8 +39,8 @@
       <file leaf-file-name="create_model.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build/create_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="19" lean-forward="true" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
+            <state relative-caret-position="272">
+              <caret line="17" column="19" lean-forward="false" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -43,11 +48,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="supervised_policy_trainer.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="supervised_policy_trainer.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AmazonEdge/training/supervised_policy_trainer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="908">
-              <caret line="149" column="24" lean-forward="true" selection-start-line="149" selection-start-column="24" selection-end-line="149" selection-end-column="24" />
+            <state relative-caret-position="224">
+              <caret line="250" column="0" lean-forward="true" selection-start-line="250" selection-start-column="0" selection-end-line="250" selection-end-column="0" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -55,11 +60,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="preprocessing.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="preprocessing.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/AmazonEdge/preprocessing/preprocessing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="629">
-              <caret line="38" column="6" lean-forward="false" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
+            <state relative-caret-position="310">
+              <caret line="38" column="65" lean-forward="false" selection-start-line="38" selection-start-column="65" selection-end-line="38" selection-end-column="65" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -70,8 +75,8 @@
       <file leaf-file-name="policy.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AmazonEdge/models/policy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1717">
-              <caret line="34" column="30" lean-forward="true" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
+            <state relative-caret-position="0">
+              <caret line="153" column="79" lean-forward="true" selection-start-line="153" selection-start-column="79" selection-end-line="153" selection-end-column="79" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
@@ -79,11 +84,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="util.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AmazonEdge/util.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="amazon.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AmazonEdge/amazon.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1224">
-              <caret line="72" column="19" lean-forward="false" selection-start-line="72" selection-start-column="19" selection-end-line="72" selection-end-column="19" />
+            <state relative-caret-position="544">
+              <caret line="32" column="42" lean-forward="false" selection-start-line="32" selection-start-column="42" selection-end-line="32" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -102,8 +117,8 @@
       <file leaf-file-name="nn_util.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AmazonEdge/models/nn_util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="23" column="34" lean-forward="false" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
+            <state relative-caret-position="221">
+              <caret line="95" column="83" lean-forward="true" selection-start-line="95" selection-start-column="83" selection-end-line="95" selection-end-column="83" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
               </folding>
@@ -121,6 +136,18 @@
       <find>train_val_test</find>
       <find>shuffled_hdf5_batch_generator</find>
       <find>transforms</find>
+      <find>60</find>
+      <find>one_hot_action</find>
+      <find>output</find>
+      <find>input_dim</find>
+      <find>.add</find>
+      <find>Bias</find>
+      <find>train_data_generator</find>
+      <find>create_network</find>
+      <find>Convolution2D</find>
+      <find>[inpt, 0</find>
+      <find>model_input</find>
+      <find>19</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -132,16 +159,16 @@
         <option value="$USER_HOME$/replace_string.py" />
         <option value="$USER_HOME$/test.py" />
         <option value="$PROJECT_DIR$/AmazonEdge/amazon.py" />
-        <option value="$PROJECT_DIR$/AmazonEdge/util.py" />
-        <option value="$PROJECT_DIR$/AmazonEdge/models/policy.py" />
-        <option value="$PROJECT_DIR$/AmazonEdge/models/nn_util.py" />
         <option value="$PROJECT_DIR$/create_model.py" />
-        <option value="$PROJECT_DIR$/AmazonEdge/preprocessing/preprocessing.py" />
         <option value="$PROJECT_DIR$/../AmazonEdge.data/scripts/to_hdf5.py" />
         <option value="$PROJECT_DIR$/build/create_model.py" />
         <option value="$PROJECT_DIR$/tests/test_supervised_policy_trainer.py" />
         <option value="$PROJECT_DIR$/../AmazonEdge.data/scripts/actions_to_feature_layers.py" />
+        <option value="$PROJECT_DIR$/AmazonEdge/util.py" />
         <option value="$PROJECT_DIR$/AmazonEdge/training/supervised_policy_trainer.py" />
+        <option value="$PROJECT_DIR$/AmazonEdge/models/nn_util.py" />
+        <option value="$PROJECT_DIR$/AmazonEdge/models/policy.py" />
+        <option value="$PROJECT_DIR$/AmazonEdge/preprocessing/preprocessing.py" />
       </list>
     </option>
   </component>
@@ -151,11 +178,11 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="787" />
-    <option name="y" value="23" />
-    <option name="width" value="1272" />
-    <option name="height" value="1061" />
+  <component name="ProjectFrameBounds" extendedState="4">
+    <option name="x" value="780" />
+    <option name="y" value="32" />
+    <option name="width" value="964" />
+    <option name="height" value="1084" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -175,7 +202,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../deep-pink" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="database.data.csv.formats" />
   </component>
   <component name="RunDashboard">
@@ -233,7 +260,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="787" y="23" width="1272" height="1061" extended-state="0" />
+    <frame x="780" y="32" width="964" height="1084" extended-state="4" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -514,13 +541,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AmazonEdge/util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="8" column="23" lean-forward="false" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/AmazonEdge/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -537,6 +557,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../AmazonEdge.data/scripts/to_hdf5.py" />
+    <entry file="file://$PROJECT_DIR$/../AmazonEdge.data/scripts/actions_to_feature_layers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="54" column="65" lean-forward="true" selection-start-line="54" selection-start-column="65" selection-end-line="54" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AmazonEdge/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AmazonEdge/amazon.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" column="42" lean-forward="false" selection-start-line="32" selection-start-column="42" selection-end-line="32" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$USER_HOME$/anaconda3/envs/AmazonEdge/lib/python2.7/site-packages/keras/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1904">
@@ -545,38 +589,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AmazonEdge/models/nn_util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="23" column="34" lean-forward="false" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AmazonEdge/amazon.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1224">
-          <caret line="72" column="19" lean-forward="false" selection-start-line="72" selection-start-column="19" selection-end-line="72" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../AmazonEdge.data/scripts/to_hdf5.py" />
-    <entry file="file://$PROJECT_DIR$/AmazonEdge/preprocessing/preprocessing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="38" column="6" lean-forward="false" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_supervised_policy_trainer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
+        <state relative-caret-position="136">
           <caret line="10" column="62" lean-forward="false" selection-start-line="10" selection-start-column="62" selection-end-line="10" selection-end-column="62" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -584,40 +599,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../AmazonEdge.data/scripts/actions_to_feature_layers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="54" column="65" lean-forward="true" selection-start-line="54" selection-start-column="65" selection-end-line="54" selection-end-column="65" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build/create_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="19" lean-forward="true" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
+        <state relative-caret-position="272">
+          <caret line="17" column="19" lean-forward="false" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/AmazonEdge/training/supervised_policy_trainer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="250" column="0" lean-forward="true" selection-start-line="250" selection-start-column="0" selection-end-line="250" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AmazonEdge/models/nn_util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="95" column="83" lean-forward="true" selection-start-line="95" selection-start-column="83" selection-end-line="95" selection-end-column="83" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/AmazonEdge/models/policy.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1717">
-          <caret line="34" column="30" lean-forward="true" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
+        <state relative-caret-position="0">
+          <caret line="153" column="79" lean-forward="true" selection-start-line="153" selection-start-column="79" selection-end-line="153" selection-end-column="79" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AmazonEdge/training/supervised_policy_trainer.py">
+    <entry file="file://$PROJECT_DIR$/AmazonEdge/preprocessing/preprocessing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="908">
-          <caret line="149" column="24" lean-forward="true" selection-start-line="149" selection-start-column="24" selection-end-line="149" selection-end-column="24" />
+        <state relative-caret-position="310">
+          <caret line="38" column="65" lean-forward="false" selection-start-line="38" selection-start-column="65" selection-end-line="38" selection-end-column="65" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

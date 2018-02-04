@@ -52,7 +52,7 @@ class CNNPolicy(NeuralNetBase):
         return results
 
     def eval_state(self, state, moves=None):
-        """Given a GameState object, returns list of (action, probility) pairs
+        """Given a GameState object, returns a list of (action, probability) pairs
         according to the network outputs
 
         If a list of moves is specified, only those moves are kept in the distribution
@@ -88,8 +88,8 @@ class CNNPolicy(NeuralNetBase):
         params = defaults
         params.update(kwargs)
 
-        # create the network
-        # a series of zero-padding followed by convolutions
+        # create the network:
+        # a series of zero-paddings followed by convolutions
         # such that the output dimensions are also board x board
         # the Keras Sequential model
         network = Sequential()
@@ -100,7 +100,7 @@ class CNNPolicy(NeuralNetBase):
             nb_filter=params.get("filters_per_layer_1", params["filters_per_layer"]),
             nb_row=params["filter_width_1"],
             nb_col=params["filter_width_1"],
-            init ='uniform',
+            init='uniform',
             activation='relu',
             border_mode='same'))
 
@@ -129,14 +129,6 @@ class CNNPolicy(NeuralNetBase):
             nb_col=1,
             init='uniform',
             border_mode='same'))
-
-        # the last layer maps each <filters_per_layer> feature to a number
-        network.add(convolutional.Convolution2D(
-            nb_filter=1,
-            nb_row=1,
-            nb_col=1,
-            init='uniform',
-            border_mode='same'))
         # reshape output to be board x board
         network.add(Flatten())
         # add a bias to each board location
@@ -151,13 +143,14 @@ class CNNPolicy(NeuralNetBase):
 class ResnetPolicy(CNNPolicy):
     """Residual network architecture
     """
+
     @staticmethod
     def create_network(**kwargs):
         """construct a convolutional neural network with Resnet-style skip connections.
         Arguments are the same as with the default CNNPolicy network, except the default
         number of layers is 20 plus a new n_skip parameter
 
-        Kewords Arguments:
+        Keywords Arguments:
         - input_dim:             depth of features to be processed by first layer (no default)
         - board:                 width of the go board to be processed (default 10)
         - filters_per_layer:     number of filters used on every layer (default 128)

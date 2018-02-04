@@ -11,15 +11,7 @@ def get_board(state):
     planes[1, :, :] = state.board == -state.current_player  # opponent stone
     planes[2, :, :] = state.board == am.BARRIER  # barrier placed
     planes[3, :, :] = state.board == am.EMPTY  # empty space
-
-
-def get_legal(state):
-    """Zero at all illegal moves, one at all legal moves.
-    """
-    feature = np.zeros((1, state.size, state.size))
-    for (x, y) in state.get_legal_moves():
-        feature[0, x, y] = 1
-    return feature
+    return planes
 
 
 # named features and their sizes are defined here
@@ -37,10 +29,6 @@ FEATURES = {
         "size": 1,
         "function": lambda state: np.zeros((1, state.size, state.size))
     },
-    "legal": {
-        "size": 1,
-        "function": get_legal
-    }
 }
 
 DEFAULT_FEATURES = [
@@ -48,11 +36,11 @@ DEFAULT_FEATURES = [
 
 
 class Preprocess(object):
-    """a class to convert from AmazonEdge objects to tensors of one-hot
+    """a class to convert from AmazonEdge GameState objects to tensors of one-hot
     features for NN inputs
     """
 
-    def __init__(self, feature_list = DEFAULT_FEATURES):
+    def __init__(self, feature_list=DEFAULT_FEATURES):
         """create a preprocessor object that will concatenate together the
         given list of features
         """
@@ -73,6 +61,6 @@ class Preprocess(object):
         """
         feat_tensors = [proc(state) for proc in self.processors]
 
-        # concatenate along feature dimensiion then add in a singleton 'batch' dimension
+        # concatenate along feature dimension then add in a singleton 'batch' dimension
         f, s = self.output_dim, state.size
-        return np.concatenate(feat_tensors).reshape(1, f, s, s)
+        return np.concatenate(feat_tensors).reshape((1, f, s, s))
