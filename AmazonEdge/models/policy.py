@@ -102,7 +102,8 @@ class CNNPolicy(NeuralNetBase):
             nb_col=params["filter_width_1"],
             init='uniform',
             activation='relu',
-            border_mode='same'))
+            border_mode='same',
+            dim_ordering='th'))
 
         # create all other layers
         for i in range(2, params["layers"] + 1):
@@ -120,7 +121,8 @@ class CNNPolicy(NeuralNetBase):
                 nb_col=filter_width,
                 init='uniform',
                 activation='relu',
-                border_mode='same'))
+                border_mode='same',
+                dim_ordering='th'))
 
         # the last layer maps each <filters_per_layer> feature to a number
         network.add(convolutional.Convolution2D(
@@ -128,13 +130,16 @@ class CNNPolicy(NeuralNetBase):
             nb_row=1,
             nb_col=1,
             init='uniform',
-            border_mode='same'))
+            border_mode='same',
+            dim_ordering='th'))
         # reshape output to be board x board
         network.add(Flatten())
         # add a bias to each board location
         network.add(Bias())
         # softmax makes it into a probability distribution
         network.add(Activation('softmax'))
+        # display network summary
+        # network.summary()
 
         return network
 
