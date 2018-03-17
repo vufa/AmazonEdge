@@ -1,3 +1,4 @@
+.idea/
 *.pyc
 output/
 tests/test_data/.tmp.training/

@@ -1,0 +1,14 @@
+sudo: false
+language: python
+cache: pip
+before_script:
+- pip install -r requirements.txt
+- pip install tensorflow
+script:
+- python -m tests.test_supervised_policy_trainer
+notifications:
+  on_success: change
+  on_failure: always
+matrix:
+  include:
+    - python: 2.7

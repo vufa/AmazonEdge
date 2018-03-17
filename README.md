@@ -1,15 +1,21 @@
-# Amazon Edge
+# AmazonEdge
 
-An AI for Game of Amazons, AmazonEdge base on neural networks with supervised learning and reinforcement learning.
+Build Status: [![Build Status](https://travis-ci.org/countstarlight/AmazonEdge.svg?branch=master)](https://travis-ci.org/countstarlight/AmazonEdge)
+
+AmazonEdge is an AI for Game of Amazons, based on neural networks with supervised learning and reinforcement learning.
 
 ## Environment
 * python 2.7
-* anaconda3(recommend)
+* Anaconda3(recommend)
 
+## For Linux:
 #### 1.Create an anaconda environment for Amazon Edge(recommend)
 
 * Download Anaconda: https://www.anaconda.com/download/#linux
-* Install:
+
+* Installing Anaconda follow [Document](https://conda.io/docs/user-guide/install/linux.html)
+
+* Create an environment for AmazonEdge:
 
 ```shell
 conda create -n AmazonEdge python=2.7
@@ -34,18 +40,23 @@ Edit `~/.keras/keras.json` to
 ```
 ## Phase 1: supervised learning of policy networks
 
+### Generate hdf5 file from actions file
+```shell
+python -m tools.actions_to_feature_layers
+```
+The input file at `data/actions/actions.txt` and the output file at `data/hdf5/`, you can edit `tools/actions_to_feature_layers` as needed.
 ### Supervised training script
 
 To see what arguments are available, use
 
 ```shell
-python2.7 -m AmazonEdge.training.supervised_policy_trainer --help
+python -m AmazonEdge.training.supervised_policy_trainer --help
 ```
 
 #### 1.Get a model file(a json specifying the policy network's architecture)
 
 ```shell
-python2.7 -m build/create_model MODEL_NAME.json MODEL_PATH
+python -m build/create_model MODEL_NAME.json MODEL_PATH
 ```
 
 #### 2.Running tests
