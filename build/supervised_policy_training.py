@@ -1,3 +1,8 @@
+#
+# Copyright (c) 2018 CountStarlight
+# Licensed under The MIT License (MIT)
+# See: LICENSE
+#
 from AmazonEdge.training.supervised_policy_trainer import run_training
 import unittest
 

@@ -1,3 +1,8 @@
+#
+# Copyright (c) 2018 CountStarlight
+# Licensed under The MIT License (MIT)
+# See: LICENSE
+#
 import numpy as np
 import AmazonEdge.amazon as am
 

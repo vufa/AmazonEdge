@@ -1,10 +1,15 @@
+#
+# Copyright (c) 2018 CountStarlight
+# Licensed under The MIT License (MIT)
+# See: LICENSE
+#
 import numpy as np
 
 WHITE = -1
 BLACK = +1
 BARRIER = 2
 EMPTY = 0
-PASS_MOVE = None
+GAME_OVER = 4
 
 
 class GameState(object):

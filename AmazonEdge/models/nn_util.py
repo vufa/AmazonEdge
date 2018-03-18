@@ -1,3 +1,8 @@
+#
+# Copyright (c) 2018 CountStarlight
+# Licensed under The MIT License (MIT)
+# See: LICENSE
+#
 from keras import backend as K
 from keras.models import model_from_json
 from keras.engine.topology import Layer

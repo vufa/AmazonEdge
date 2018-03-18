@@ -3,6 +3,4 @@
 # Licensed under The MIT License (MIT)
 # See: LICENSE
 #
-def flatten_idx(position, size):
-    (x, y) = position
-    return x * size + y
+# Amazons Text Protocol
